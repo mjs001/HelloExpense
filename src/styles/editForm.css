@@ -1,0 +1,31 @@
+.newExpenseForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+  padding-top: 10px;
+}
+
+.formContainer {
+}
+
+.marginBottom10 {
+  margin-bottom: 10px;
+}
+
+.btnMdWidth {
+  width: 10vw;
+}
+
+.mediumWidth {
+  width: 20vw;
+}
+
+.mobileWidth {
+  width: 90vw;
+}
+
+.fullContainerWidth {
+  width: 100%;
+}

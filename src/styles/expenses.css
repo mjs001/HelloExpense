@@ -1,0 +1,64 @@
+.expensesList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.newExpenseForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 6px;
+}
+
+.editButtons {
+  margin-left: 3px !important;
+  margin-right: 3px !important;
+  width: 30% !important;
+}
+
+.editButtonsMobile {
+  width: 100% !important;
+  height: 100%;
+  margin-bottom: 10px !important;
+}
+
+.editBtnContainer {
+  width: 100% !important;
+}
+
+.marginBottom10 {
+  margin-bottom: 10px;
+}
+
+.btnMdWidth {
+  width: 10vw;
+}
+
+.mediumWidth {
+  width: 20vw;
+}
+
+.mobileWidth {
+  width: 90vw;
+}
+
+.mobileWidthPercent {
+  width: 90%;
+}
+
+.fullContainerWidth {
+  width: 100%;
+}
+.tableRowSmall {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tableRow {
+  display: table-row;
+}
