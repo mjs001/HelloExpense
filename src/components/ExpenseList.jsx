@@ -37,7 +37,7 @@ const ExpenseList = () => {
 
   useEffect(() => {
     getExpenses(dispatch);
-  }, []);
+  }, [dispatch]);
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(8);

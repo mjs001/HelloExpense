@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   setExpenses,
   createNewExpense,
@@ -8,7 +9,6 @@ import {
   editIndividualExpenseError,
   deleteIndividualExpenseError,
 } from "../app/expensesSlice";
-import axios from "axios";
 import { determineBaseUrl } from "../utils/determineBaseUrl";
 
 const url = determineBaseUrl();

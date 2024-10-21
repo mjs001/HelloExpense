@@ -20,7 +20,7 @@ const DoughnutChart = () => {
 
   useEffect(() => {
     getExpensesPerCategory(dispatch);
-  }, [expenses]);
+  }, [expenses, dispatch]);
 
   useEffect(() => {
     setDoughnut({
