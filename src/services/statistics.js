@@ -1,8 +1,12 @@
 import axios from "axios";
 import { setExpenseAmountPerCategory } from "../app/statisticsSlice";
 
+import { determineBaseUrl } from "../utils/determineBaseUrl";
+
+const url = determineBaseUrl();
+
 const axiosInstance = axios.create({
-  baseURL: "https://localhost:44340/Statistics",
+  baseURL: `${url}/Statistics`,
 });
 
 export const getExpensesPerCategory = async (dispatch) => {

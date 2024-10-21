@@ -9,8 +9,9 @@ import {
   deleteIndividualExpenseError,
 } from "../app/expensesSlice";
 import axios from "axios";
+import { determineBaseUrl } from "../utils/determineBaseUrl";
 
-const url = "https://localhost:44340/Expenses";
+const url = determineBaseUrl();
 
 const axiosInstance = axios.create({
   baseURL: url,
