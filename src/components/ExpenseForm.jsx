@@ -16,13 +16,12 @@ import "../styles/expenses.css";
 
 const ExpenseForm = ({ expense, handleClose }) => {
   const dispatch = useDispatch();
-  const descriptions = ["Groceries", "Gas", "Car Payment", "Utilities"];
+  const descriptions = ["Food", "Travel", "Bills", "Transportation", "Other"];
   const theme = useTheme();
   const belowMd = useMediaQuery(theme.breakpoints.down("md"));
   const belowSm = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [expenseData, setExpenseData] = useState({
-    id: Math.random().toString(20),
     date: dayjs().format("MM/DD/YYYY"),
     description: descriptions[0],
     amount: 0,
@@ -43,14 +42,14 @@ const ExpenseForm = ({ expense, handleClose }) => {
       newExpense(dispatch, {
         date: expenseData.date,
         description: expenseData.description,
-        amount: expenseData.amount,
+        amount: Number(expenseData.amount),
       });
     } else {
       editExpense(dispatch, {
         id: expense.id,
         date: expenseData.date,
         description: expenseData.description,
-        amount: expenseData.amount,
+        amount: Number(expenseData.amount),
       });
       handleClose();
     }
@@ -59,8 +58,12 @@ const ExpenseForm = ({ expense, handleClose }) => {
   useEffect(() => {
     if (expense !== undefined) {
       setIsNewExpense(false);
-      setExpenseData((state) => ({ ...state, amount: expense.amount }));
-      // setExpenseData(expense);
+      setExpenseData({
+        id: expense.id,
+        date: expense.date,
+        description: expense.description,
+        amount: expense.amount,
+      });
     } else {
       setIsNewExpense(true);
     }
@@ -88,7 +91,7 @@ const ExpenseForm = ({ expense, handleClose }) => {
           label="Description"
           value={expenseData.description}
           size="small"
-          className="marginBottom10"
+          className="marginBottom10 transparent"
           onChange={(e) => onChange(e, "description")}
         >
           {descriptions.map((d) => (
@@ -108,7 +111,7 @@ const ExpenseForm = ({ expense, handleClose }) => {
           },
         }}
         size="small"
-        className={`${determineClasses()}`}
+        className={`${determineClasses()} transparent`}
         value={expenseData.amount}
         onChange={(e) => onChange(e, "amount")}
         sx={{ marginBottom: "10px" }}
@@ -118,18 +121,18 @@ const ExpenseForm = ({ expense, handleClose }) => {
         label="Date"
         value={dayjs(expenseData.date)}
         onChange={(e) => onChangeDate(e, "date")}
-        className={`${determineClasses()} marginBottom10`}
+        className={`${determineClasses()} marginBottom10 transparent`}
         slotProps={{ textField: { size: "small" } }}
         sx={{ marginBottom: "10px" }}
       />
 
       <div>
-        {isNewExpense ? (
+        {!expense ? (
           <Button
             className={
               belowMd
-                ? "mobileWidth marginBottom10"
-                : "btnMdWidth marginBottom10"
+                ? "mobileWidth marginBottom10 buttonColor"
+                : "btnMdWidth marginBottom10 buttonColor"
             }
             sx={{ marginBottom: "10px" }}
             variant="contained"
@@ -142,8 +145,8 @@ const ExpenseForm = ({ expense, handleClose }) => {
             <Button
               className={
                 belowMd
-                  ? "editButtonsMobile marginBottom10 "
-                  : "btnMdWidth marginBottom10 editButtons"
+                  ? "editButtonsMobile marginBottom10 buttonColor"
+                  : "btnMdWidth marginBottom10 editButtons buttonColor"
               }
               variant="contained"
               onClick={() => deleteExpense(dispatch, expense)}
@@ -153,8 +156,8 @@ const ExpenseForm = ({ expense, handleClose }) => {
             <Button
               className={
                 belowMd
-                  ? "editButtonsMobile marginBottom10"
-                  : "btnMdWidth marginBottom10 editButtons"
+                  ? "editButtonsMobile marginBottom10 buttonColor"
+                  : "btnMdWidth marginBottom10 editButtons buttonColor"
               }
               variant="contained"
               type="submit"
@@ -164,8 +167,8 @@ const ExpenseForm = ({ expense, handleClose }) => {
             <Button
               className={
                 belowMd
-                  ? "editButtonsMobile marginBottom10"
-                  : "btnMdWidth marginBottom10 editButtons"
+                  ? "editButtonsMobile marginBottom10 buttonColor"
+                  : "btnMdWidth marginBottom10 editButtons buttonColor"
               }
               variant="contained"
               onClick={() => handleClose()}

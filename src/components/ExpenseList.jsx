@@ -12,19 +12,15 @@ import Button from "@mui/material/Button";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import EditDialog from "./EditDialog";
-import { setEditing } from "../services/expenses";
+import { setEditing } from "../services/utilities";
 import "../styles/expenses.css";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import ExpenseForm from "./ExpenseForm";
-import { current } from "@reduxjs/toolkit";
+
+import TablePagination from "@mui/material/TablePagination";
+
 const ExpenseList = () => {
   const dispatch = useDispatch();
-  const expenses = useSelector((state) => state.expensesReducer.expenses);
-  const editing = useSelector((state) => state.expensesReducer.isEditing)[0]
+  const expenses = useSelector((state) => state.expensesSlice.expenses);
+  const editing = useSelector((state) => state.utilitiesSlice.isEditing)[0]
     ?.isEditing;
   const theme = useTheme();
   const belowMd = useMediaQuery(theme.breakpoints.down("md"));
@@ -43,20 +39,43 @@ const ExpenseList = () => {
     getExpenses(dispatch);
   }, []);
 
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(8);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+  };
+
+  const paginatedExpenses = expenses.slice(
+    page * rowsPerPage,
+    page * rowsPerPage + rowsPerPage
+  );
+
   return (
     <div className="expensesList">
-      <TableContainer component={Paper}>
-        <Table size="small" aria-label="table of expenses">
-          <TableHead>
-            <TableRow sx={{ display: belowSm ? "none" : "table-row" }}>
+      <TableContainer className="transparent hide margin" component={Paper}>
+        <Table
+          className="transparent"
+          size="small"
+          aria-label="table of expenses"
+        >
+          <TableHead className="transparent">
+            <TableRow
+              className="transparent"
+              sx={{ display: belowSm ? "none" : "table-row" }}
+            >
               <TableCell align="left">Date</TableCell>
               <TableCell align="center">Description</TableCell>
               <TableCell align="center">Amount</TableCell>
               <TableCell align="center">Edit</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            {expenses.map((e) => {
+          <TableBody className="hide">
+            {paginatedExpenses.map((e) => {
               return (
                 <React.Fragment key={e.id}>
                   <TableRow className={belowSm ? "tableRowSmall" : "tableRow"}>
@@ -88,7 +107,11 @@ const ExpenseList = () => {
                     >
                       <Button
                         variant="contained"
-                        className={belowSm ? "mobileWidth" : ""}
+                        className={
+                          belowSm
+                            ? "mobileWidthPercent buttonColor"
+                            : "buttonColor"
+                        }
                         onClick={() => handleOpen(e)}
                       >
                         Edit
@@ -107,6 +130,17 @@ const ExpenseList = () => {
             })}
           </TableBody>
         </Table>
+        <TablePagination
+          className="hide"
+          component="div"
+          count={expenses.length}
+          page={page}
+          onPageChange={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+          rowsPerPageOptions={[8, 15, 25]}
+          labelRowsPerPage="Rows per page"
+        />
       </TableContainer>
     </div>
   );

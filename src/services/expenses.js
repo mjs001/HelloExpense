@@ -1,52 +1,57 @@
-import { ActionCreators } from "../app/expensesReducer";
+import {
+  setExpenses,
+  createNewExpense,
+  editIndividualExpense,
+  deleteIndividualExpense,
+  setExpensesError,
+  createNewExpenseError,
+  editIndividualExpenseError,
+  deleteIndividualExpenseError,
+} from "../app/expensesSlice";
+import axios from "axios";
+
+const url = "https://localhost:44340/Expenses";
+
+const axiosInstance = axios.create({
+  baseURL: url,
+});
+
 export const getExpenses = async (dispatch) => {
   try {
-    const expenses = [
-      { id: 1, date: "10/18/2024", description: "Groceries", amount: 125.42 },
-      { id: 2, date: "10/18/2024", description: "Gas", amount: 32.12 },
-      { id: 3, date: "10/19/2024", description: "Car Payment", amount: 516.15 },
-    ];
-    dispatch(ActionCreators.setExpenses(expenses));
+    const { data } = await axiosInstance.get();
+    dispatch(setExpenses(data));
   } catch (err) {
-    console.log("Error inside getExpenses", err);
+    dispatch(setExpensesError());
+    console.log("Error retrieving expenses.", err.response);
   }
 };
 
 export const newExpense = async (dispatch, expense) => {
   try {
-    dispatch(
-      ActionCreators.newExpense({
-        id: 10,
-        date: expense.date,
-        description: expense.description,
-        amount: expense.amount,
-      })
-    );
+    const { data } = await axiosInstance.post("", expense);
+    dispatch(createNewExpense(data));
   } catch (err) {
-    console.log("Error inside newExpense", err);
-  }
-};
-
-export const setEditing = async (dispatch, editing) => {
-  try {
-    dispatch(ActionCreators.isEditing({ isEditing: editing }));
-  } catch (err) {
-    console.log("Error inside isEditing", err);
+    dispatch(createNewExpenseError());
+    console.log("Error creating new expense.", err.response);
   }
 };
 
 export const editExpense = async (dispatch, expense) => {
   try {
-    dispatch(ActionCreators.editExpense(expense));
+    await axiosInstance.put("", expense);
+    dispatch(editIndividualExpense(expense));
   } catch (err) {
-    console.log("Error inside editExpense", err);
+    dispatch(editIndividualExpenseError());
+    console.log("Error editing an expense.", err.response);
   }
 };
 
 export const deleteExpense = async (dispatch, expense) => {
   try {
-    dispatch(ActionCreators.deleteExpense(expense));
+    await axiosInstance.delete(`${url}?id=${expense.id}`);
+    dispatch(deleteIndividualExpense(expense));
   } catch (err) {
-    console.log("Error inside deleteExpense", err);
+    dispatch(deleteIndividualExpenseError());
+    console.log("Error deleting an expense.", err.response);
   }
 };

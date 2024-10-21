@@ -25,6 +25,20 @@
   margin-bottom: 10px !important;
 }
 
+.buttonColor {
+  background-color: rgb(152, 30, 168) !important;
+}
+
+.transparent {
+  background: rgba(251, 251, 251, 0.496) !important ;
+  backdrop-filter: blur(5.2px);
+  -webkit-backdrop-filter: blur(5.2px);
+}
+
+.hide {
+  overflow-x: hidden !important;
+}
+
 .editBtnContainer {
   width: 100% !important;
 }
@@ -43,6 +57,10 @@
 
 .mobileWidth {
   width: 90vw;
+}
+
+.margin {
+  margin: 0 10px 10px;
 }
 
 .mobileWidthPercent {
