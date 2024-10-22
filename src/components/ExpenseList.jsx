@@ -23,8 +23,8 @@ const ExpenseList = () => {
   const editing = useSelector((state) => state.utilitiesSlice.isEditing)[0]
     ?.isEditing;
   const theme = useTheme();
-  const belowMd = useMediaQuery(theme.breakpoints.down("md"));
   const belowSm = useMediaQuery(theme.breakpoints.down("sm"));
+  const belowXs = useMediaQuery("(max-width: 350px)");
   const [currentExpense, setCurrentExpense] = useState(null);
   const handleOpen = (e) => {
     setCurrentExpense(e);
@@ -86,7 +86,7 @@ const ExpenseList = () => {
             {paginatedExpenses.map((e) => {
               return (
                 <React.Fragment key={e.id}>
-                  <TableRow className={belowSm ? "tableRowSmall" : "tableRow"}>
+                  <TableRow className={belowSm ? "flexForMobile" : "tableRow"}>
                     <TableCell
                       component="th"
                       scope="row"
@@ -146,7 +146,7 @@ const ExpenseList = () => {
           onPageChange={handleChangePage}
           rowsPerPage={rowsPerPage}
           onRowsPerPageChange={handleChangeRowsPerPage}
-          rowsPerPageOptions={[8, 15, 25]}
+          rowsPerPageOptions={belowXs ? [] : [8, 15, 25]}
           labelRowsPerPage={belowSm ? "" : "Rows per page"}
         />
       </TableContainer>

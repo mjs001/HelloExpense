@@ -93,17 +93,23 @@
 .fullContainerWidth {
   width: 100%;
 }
-.tableRowSmall.MuiTableRow-root {
+
+.flexForMobile.MuiTableRow-root {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-
+.flexForMobile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .tableRow {
   display: table-row;
 }
 
-.inputLabel.MuiFormLabel-root.MuiInputLabel-root {
+.MuiFormLabel-root.MuiInputLabel-root {
   color: black;
 }
