@@ -2,7 +2,6 @@ import {
   createNewExpense,
   editIndividualExpense,
   deleteIndividualExpense,
-  setExpensesError,
   createNewExpenseError,
   editIndividualExpenseError,
   deleteIndividualExpenseError,
@@ -20,9 +19,6 @@ const ToastMiddleWare = () => (next) => (action) => {
     case deleteIndividualExpense.type:
       toast.success("Expense deleted successfully");
       break;
-    // case setExpensesError.type:
-    //   toast.error("Error loading expenses");
-    //   break;
     case createNewExpenseError.type:
       toast.error("Error adding new expense");
       break;

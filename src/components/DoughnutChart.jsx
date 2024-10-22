@@ -33,7 +33,7 @@ const DoughnutChart = () => {
     plugins: {
       legend: {
         labels: {
-          color: "#000", // Change the text color of the legend labels
+          color: "#000",
         },
       },
     },
