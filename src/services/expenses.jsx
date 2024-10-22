@@ -11,7 +11,7 @@ import {
 } from "../app/expensesSlice";
 import { determineBaseUrl } from "../utils/determineBaseUrl";
 
-const url = `${determineBaseUrl()}Expenses`;
+const url = `${determineBaseUrl()}/Expenses`;
 
 const axiosInstance = axios.create({
   baseURL: url,

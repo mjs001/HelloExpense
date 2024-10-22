@@ -55,6 +55,17 @@ const ExpenseList = () => {
     page * rowsPerPage + rowsPerPage
   );
 
+  useEffect(() => {
+    if (expenses.length > 0) {
+      const totalPages = Math.ceil(expenses.length / rowsPerPage);
+      if (page >= totalPages) {
+        setPage(totalPages - 1);
+      }
+    } else {
+      setPage(0);
+    }
+  }, [expenses, page, rowsPerPage]);
+
   return (
     <div className="expensesList">
       <TableContainer className="transparent hide margin" component={Paper}>
