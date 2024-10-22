@@ -6,12 +6,17 @@
   margin: 10px;
 }
 
-.glass {
-  background: rgba(250, 250, 250, 0.538) !important ;
+.glass.MuiPaper-root {
+  background: rgba(250, 250, 250, 0.538);
   backdrop-filter: blur(5.2px);
   -webkit-backdrop-filter: blur(5.2px);
 }
 
 .paddingBtm {
   padding-bottom: 3px;
+}
+
+.marginLR {
+  padding-left: 15px;
+  padding-right: 15px;
 }

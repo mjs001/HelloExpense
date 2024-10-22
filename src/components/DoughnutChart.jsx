@@ -29,6 +29,16 @@ const DoughnutChart = () => {
     });
   }, [expenseAmountPerCategory]);
 
+  const options = {
+    plugins: {
+      legend: {
+        labels: {
+          color: "#000", // Change the text color of the legend labels
+        },
+      },
+    },
+  };
+
   const data = {
     labels: doughnut.labels,
     datasets: [
@@ -52,7 +62,11 @@ const DoughnutChart = () => {
   return (
     <div hidden={!expenseAmountPerCategory || !expenseAmountPerCategory.length}>
       <h2>Expenses Per Category</h2>
-      <Doughnut data={data} className="doughnutChartContainer" />
+      <Doughnut
+        data={data}
+        className="doughnutChartContainer"
+        options={options}
+      />
     </div>
   );
 };

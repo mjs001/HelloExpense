@@ -86,12 +86,12 @@ const ExpenseForm = ({ expense, handleClose }) => {
         className={`${determineClasses()}`}
         variant="outlined"
       >
-        <InputLabel>Description</InputLabel>
+        <InputLabel className="inputLabel">Description</InputLabel>
         <Select
           label="Description"
           value={expenseData.description}
           size="small"
-          className="marginBottom10 transparent"
+          className="marginBottom10 expenseFormInputColor"
           onChange={(e) => onChange(e, "description")}
         >
           {descriptions.map((d) => (
@@ -109,20 +109,28 @@ const ExpenseForm = ({ expense, handleClose }) => {
             step: "0.01",
             min: 0,
           },
+          inputLabel: {
+            className: "inputLabel",
+          },
         }}
         size="small"
-        className={`${determineClasses()} transparent`}
+        className={`${determineClasses()} expenseFormInputColor marginBottom10`}
         value={expenseData.amount}
         onChange={(e) => onChange(e, "amount")}
-        sx={{ marginBottom: "10px" }}
+        // sx={{ marginBottom: "10px" }}
       />
 
       <DatePicker
         label="Date"
         value={dayjs(expenseData.date)}
         onChange={(e) => onChangeDate(e, "date")}
-        className={`${determineClasses()} marginBottom10 transparent`}
-        slotProps={{ textField: { size: "small" } }}
+        className={`${determineClasses()} marginBottom10 expenseFormInputColor inputLabel`}
+        slotProps={{
+          textField: { size: "small" },
+          inputLabel: {
+            className: "inputLabel",
+          },
+        }}
         sx={{ marginBottom: "10px" }}
       />
 
@@ -146,7 +154,7 @@ const ExpenseForm = ({ expense, handleClose }) => {
               className={
                 belowMd
                   ? "editButtonsMobile marginBottom10 buttonColor"
-                  : "btnMdWidth marginBottom10 editButtons buttonColor"
+                  : "marginBottom10 editButtons buttonColor"
               }
               variant="contained"
               onClick={() => deleteExpense(dispatch, expense)}

@@ -63,18 +63,26 @@ const ExpenseList = () => {
           size="small"
           aria-label="table of expenses"
         >
-          <TableHead className="transparent">
+          <TableHead className="tableHead">
             <TableRow
               className="transparent"
               sx={{ display: belowSm ? "none" : "table-row" }}
             >
-              <TableCell align="left">Date</TableCell>
-              <TableCell align="center">Description</TableCell>
-              <TableCell align="center">Amount</TableCell>
-              <TableCell align="center">Edit</TableCell>
+              <TableCell align="left" className="tableHeadCells">
+                Date
+              </TableCell>
+              <TableCell align="center" className="tableHeadCells">
+                Description
+              </TableCell>
+              <TableCell align="center" className="tableHeadCells">
+                Amount
+              </TableCell>
+              <TableCell align="center" className="tableHeadCells">
+                Edit
+              </TableCell>
             </TableRow>
           </TableHead>
-          <TableBody className="hide">
+          <TableBody>
             {paginatedExpenses.map((e) => {
               return (
                 <React.Fragment key={e.id}>
@@ -139,7 +147,7 @@ const ExpenseList = () => {
           rowsPerPage={rowsPerPage}
           onRowsPerPageChange={handleChangeRowsPerPage}
           rowsPerPageOptions={[8, 15, 25]}
-          labelRowsPerPage="Rows per page"
+          labelRowsPerPage={belowSm ? "" : "Rows per page"}
         />
       </TableContainer>
     </div>

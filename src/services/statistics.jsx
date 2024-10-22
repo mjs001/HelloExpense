@@ -6,7 +6,7 @@ import { determineBaseUrl } from "../utils/determineBaseUrl";
 const url = determineBaseUrl();
 
 const axiosInstance = axios.create({
-  baseURL: `${url}/Statistics`,
+  baseURL: `${url}Statistics`,
 });
 
 export const getExpensesPerCategory = async (dispatch) => {
