@@ -116,7 +116,6 @@ const ExpenseForm = ({ expense, handleClose }) => {
         className={`${determineClasses()} expenseFormInputColor marginBottom10`}
         value={expenseData.amount}
         onChange={(e) => onChange(e, "amount")}
-        // sx={{ marginBottom: "10px" }}
       />
 
       <DatePicker
