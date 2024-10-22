@@ -58,13 +58,13 @@ const ExpenseList = () => {
   useEffect(() => {
     if (expenses.length > 0) {
       const totalPages = Math.ceil(expenses.length / rowsPerPage);
-      if (page >= totalPages) {
+      if (paginatedExpenses.length === 0) {
         setPage(totalPages - 1);
       }
     } else {
       setPage(0);
     }
-  }, [expenses, page, rowsPerPage]);
+  }, [expenses, rowsPerPage, paginatedExpenses]);
 
   return (
     <div className="expensesList">
@@ -153,7 +153,7 @@ const ExpenseList = () => {
           className="hide"
           component="div"
           count={expenses.length}
-          page={page}
+          page={Math.min(page, Math.max(0, Math.ceil(expenses.length / rowsPerPage) - 1))}
           onPageChange={handleChangePage}
           rowsPerPage={rowsPerPage}
           onRowsPerPageChange={handleChangeRowsPerPage}

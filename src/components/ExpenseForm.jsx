@@ -19,7 +19,6 @@ const ExpenseForm = ({ expense, handleClose }) => {
   const descriptions = ["Food", "Travel", "Bills", "Transportation", "Other"];
   const theme = useTheme();
   const belowMd = useMediaQuery(theme.breakpoints.down("md"));
-  const belowSm = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [expenseData, setExpenseData] = useState({
     date: dayjs().format("MM/DD/YYYY"),
